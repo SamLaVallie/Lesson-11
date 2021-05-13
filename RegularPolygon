@@ -1,0 +1,57 @@
+public class RegularPolygon{
+
+	private int myNumSides;
+	private double mySideLength;
+	private double myR;
+	private double myr;
+
+	public RegularPolygon() {
+		myNumSides = 3;
+		mySideLength = 1.0;
+		calcr();
+		calcR();
+	}
+
+	public RegularPolygon(int numSides, double sideLength) {
+		myNumSides = numSides;
+		mySideLength = sideLength;
+		calcr();
+		calcR();
+	}
+
+	public void calcr() {
+		myr = (mySideLength / 2.0) * (1.0 / (Math.tan(Math.toRadians(180.0 / myNumSides))));
+	}
+
+	public void calcR() {
+		myR = (mySideLength / 2.0) * (1.0 / (Math.sin(Math.toRadians(180.0 / myNumSides))));
+	}
+
+	public double vertexAngle() {
+		return (myNumSides - 2.0) / myNumSides * 180.0;
+	}
+
+	public double Perimeter() {
+		return myNumSides * mySideLength;
+	}
+
+	public double Area() {
+		return myNumSides * Math.sin(Math.toRadians(360.0 / myNumSides)) * Math.pow(myR, 2.0) / 2.0;
+	}
+
+	public double getNumSide() {
+		return myNumSides;
+	}
+
+	public double getSideLength() {
+		return mySideLength;
+	}
+
+	public double getR() {
+		return myR;
+	}
+
+	public double getr() {
+		return myr;
+	}
+}
