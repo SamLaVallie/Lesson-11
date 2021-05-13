@@ -1,0 +1,47 @@
+import gpdraw.*;
+
+public class GraphicPolygon extends RegularPolygon {
+
+	private DrawingTool pen = new DrawingTool(new SketchPad(400, 400));
+	private double xPosition, yPosition;
+
+	public GraphicPolygon(int numSides, double sideLength) {
+		super(numSides, sideLength);
+		xPosition = 0;
+		yPosition = 0;
+	}
+
+	public GraphicPolygon(int numSides, double sideLength, double x, double y) {
+		super(numSides, sideLength);
+		xPosition = x;
+		yPosition = y;
+	}
+
+	public void moveTo(double x, double y) {
+		xPosition = x;
+		yPosition = y;
+	}
+
+	public void draw() {
+		pen.up();
+		pen.move(xPosition, yPosition);
+		pen.setDirection(90);
+		pen.move(getr());
+		pen.turnRight(90);
+		pen.move(getSideLength() / 2);
+		pen.turnRight(180 - vertexAngle());
+
+		pen.down();
+
+		drawSides(getNumSide());
+	}
+
+	private void drawSides(double d) {
+		pen.move(getSideLength());
+		pen.turnRight(180 - vertexAngle());
+
+		if (d > 0) {
+			drawSides(d - 1);
+		}
+	}
+}
